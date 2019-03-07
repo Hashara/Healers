@@ -2,6 +2,7 @@
     require_once('inc/connection.php');
 ?>
 <?php
+    
     //submission?
     if (isset($_POST['submit'])){
         $errors=array();
@@ -14,16 +15,19 @@
         if(!isset($_POST['password']) || strlen(trim($_POST['password']))<1){
             $errors[]="password is missing/Invalid";
         }
-
+ 
         //any errors?
         if(empty($errors)){
             //save username and password for variables
             $studentId=mysqli_real_escape_string($connection,$_POST['studentId']);
             $password=mysqli_real_escape_string($connection,$_POST['password']);
-            $hashed_password=sha1($password);
+            $hashed_password=md5($password);
 
             //prepare database query
-            $query= "SELECT * FROM studentdetails WHERE studentId='{$studentId}' AND password='{$hashed_password}' LIMIT 1";
+            $query= "SELECT * FROM studentdetails 
+             WHERE studentId='{$studentId}' 
+             AND password='{$hashed_password}' 
+            LIMIT 1";
             
             $result_set=mysqli_query($connection,$query);
             //valid?
@@ -32,7 +36,7 @@
                 
                 if(mysqli_num_rows($result_set)==1){
                     //vaild user found
-                    header('location:student.php');//rederecting student.php page
+                    header('Location:login_success.php');//rederecting student.php page
                 }else{
                     //username or password invaild
                     $errors[]="invaild username or password";
@@ -62,15 +66,19 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <title>LogIn-Helares</title>
 </head>
-<body>
+<body style = "background: url(https://images.pexels.com/photos/1388945/flowers-bouquet-blue-muscari-1388945.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500); background-size: 100%;">
     <div class="login">
-        <form action="index.php" method="post">
+        <form action="" method="post">
         
           <center> 
            <fieldset> 
            
                 <legend><h1><b>LogIn</b></h1></legend>
-                
+                <?php 
+                    if (isset($errors) && !empty($errors)){
+                        echo '<p> Invalid Username/password </p>';
+                    }
+                ?>
                 <p for="">Addmission number :</p>
                 <input type="text" name="studentId" id="" placeholder="studentId"> 
                 <p><br></p>
