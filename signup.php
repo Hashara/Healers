@@ -74,13 +74,15 @@
     <link rel="stylesheet" href="css/_variables.scss">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/signup.css">
     <title>Sign up</title>
 </head>
-<body>
-    <div align="justify">
-    <form>
+<body  style="background: url(http://www.kodul.cat/look/full/88/883812/universe-hd-wallpapers-1080p.jpg); background-size: 100%;">
+   
+    <form >
+    <div align="justify" class="container">
   <fieldset>
-    <legend align="center">Sign Up</legend>
+    <legend >Sign Up</legend>
     <?php
         if(!empty($errors)){
             echo 'Error in you form';
@@ -88,39 +90,39 @@
     ?>
     <div class="form-group" >
       <label for="">Student Id</label>
-      <input type="text" name="stuentId" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter index" required>
+      <input type="text" name="stuentId" class="form-control" id="sigmup" aria-describedby="emailHelp" placeholder="Enter index" required>
       
     </div>
     <div class="form-group">
       <label for="">Name</label>
-      <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name" required>
+      <input type="text" name="name" class="form-control" id="sigmup" aria-describedby="emailHelp" placeholder="Enter name" required>
       
     </div>
 
     <div class="form-group">
       <label for="">Batch</label>
-      <input type="text" name="batch" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter batch" required>
+      <input type="text" name="batch" class="form-control" id="sigmup" aria-describedby="emailHelp" placeholder="Enter batch" required>
       
     </div>
 
     <div class="form-group">
       <label for="">Birthday</label>
-      <input type="date" name="birthday" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter birthdate" required>
+      <input type="date" name="birthday" class="form-control" id="sigmup" aria-describedby="emailHelp" placeholder="Enter birthdate" required>
       
     </div>
 
     <div class="form-group">
       <label for="">Email address</label>
-      <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your university email" required>
+      <input type="email" name="email" class="form-control" id="sigmup" aria-describedby="emailHelp" placeholder="Enter your university email" required>
       
     </div>
     <div class="form-group">
       <label for="e">Password</label>
-      <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password"  required>
+      <input type="password" name="password" class="form-control" id=""sigmup"" placeholder="Password"  required>
     </div>
     <div class="form-group">
       <label for="">Faculty</label>
-      <select class="" name=faculty id="exampleSelect1" name= "Faculty"  required>
+      <select class="" name=faculty id="sigmup" name= "Faculty"  required>
         <option>Faculty of Engineering</option>
         <option>Faculty of Architecture </option>
         <option>Faculty of Information Technology </option>
@@ -129,15 +131,16 @@
     </div>
     <div class="form-group">
       <label for="">Department</label>
-      <input type="text" name="department" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your department">
+      <input type="text" name="department" class="form-control" id="sigmup" aria-describedby="emailHelp" placeholder="Enter your department">
       
     </div>
    
-    </fieldset>
+    
     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
   </fieldset>
+  </div>
 </form>
 
-    </div>
+    
 </body>
 </html>

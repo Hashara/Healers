@@ -55,39 +55,44 @@
   
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/_bootswatch.scss">
-    <link rel="stylesheet" href="css/_variables.scss">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="css/login.css">
     <title>LogIn-Helares</title>
 </head>
-<body style = "background: url(https://images.pexels.com/photos/1388945/flowers-bouquet-blue-muscari-1388945.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500); background-size: 100%;">
+<body style = "background: url(http://www.kodul.cat/look/full/88/883812/universe-hd-wallpapers-1080p.jpg); background-size: 100%;">
     <div class="login">
-        <form action="" method="post">
+        <form action="" method="post" >
         
           <center> 
-           <fieldset> 
            
-                <legend><h1><b>LogIn</b></h1></legend>
+           
+            <div class="row"> 
+            <div class="colunm">
+                <div class="card">
+                <legend><h1><b>Log in</b></h1></legend>
+                <img src="icons/login.png" alt="login" width=200 height=auto>
                 <?php 
                     if (isset($errors) && !empty($errors)){
-                        echo '<p> Invalid Username/password </p>';
+                        echo '<pre class="alert-danger hr">
+                        <p align="center">Invalid Username/password <p>
+                         </pre>';
                     }
                 ?>
+                 <div class="container">
                 <p for="">Addmission number :</p>
-                <input type="text" name="studentId" id="" placeholder="studentId"> 
-                <p><br></p>
+                <input type="text" name="studentId" id="" placeholder="student Id"> 
+                
                 <p for="">Password :</p>
                 <input type="password" name="password" id="" placeholder="Password">
-                <p><br></p>
-
                 <p><button type="submit" name="submit" class="btn btn-primary">LogIn</button></p>
-            </fieldset>
+                </div>
+                </div>
+            </div>   
+            </div>   
             </center>
         </form>
     </div> <!--.login-->
