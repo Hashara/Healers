@@ -1,8 +1,8 @@
-<?php 
-    require_once('inc/connection.php');
-?>
+<?php session_start(); ?>
+<?php  require_once('inc/connection.php');?>
+<?php require_once('inc/function.php');?>
 <?php
-
+    $errors = array();
     $studentId='';
     $name='';
     $batch='';
@@ -14,7 +14,12 @@
     
     //submitted?
     if (isset($_POST['submit'])){
-        $studentId=$_POST['stuentId'];
+        //checking req
+        $req_fields=array('studentId','name','batch','birthday','password','email','faculty');
+
+        $errors=array_merge($errors, check_required_fields($req_fields));
+        
+        $studentId=$_POST['studentId'];
         $name=$_POST['name'];
         $batch=$_POST['batch'];
         $birtday=$_POST['birthday'];
@@ -22,19 +27,15 @@
         $password=$_POST['password'];
         $faculty=$_POST['faculty'];
         $department=$_POST['department'];
-        $erors=array();
-
-        $studentId=mysqli_real_escape_string($connection,$_POST['stuentId']);
+        $studentId=mysqli_real_escape_string($connection,$_POST['studentId']);
         $query="SELECT * FROM studentdetails WHERE studentId='{$studentId}' LIMIT 1";
-
+       
         $result_set=mysqli_query($connection,$query);
-
         if($result_set){
             if(mysqli_num_rows($result_set)==1){
                 $errors[]='student id already exists';
             }
         }
-
         if(empty($errors)){
             $name=mysqli_real_escape_string($connection,$_POST['name']);
             $batch=mysqli_real_escape_string($connection,$_POST['batch']);
@@ -44,14 +45,12 @@
             $faculty=mysqli_real_escape_string($connection,$_POST['faculty']);
             $department=mysqli_real_escape_string($connection,$_POST['department']);
             $hashed_password=md5($password);
-
             $query="INSERT INTO studentdetails (";
-            $query="studentId,studentName,email,password,birthday,faculty,department,batch";
-            $query=") VALUES (";
-            $query="'{$studentId}','{$name}','{$email}','{$hashed_password}','{$birtday}','{$faculty}','{$department}','{$batch}'";
+            $query.="studentId,studentName,email,password,birthday,faculty,Department,batch";
+            $query.=") VALUES (";
+            $query.="'{$studentId}','{$name}','{$email}','{$hashed_password}','{$birtday}','{$faculty}','{$department}','{$batch}')";
             
             $result=mysqli_query($connection,$query);
-
             if($result){
                 //success
                 header('Location:signup_success.php');
@@ -61,9 +60,9 @@
                 
             }
         }
-
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,54 +74,99 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/index.css">
     <title>Sign up</title>
 </head>
-<body  style="background: url(http://www.kodul.cat/look/full/88/883812/universe-hd-wallpapers-1080p.jpg); background-size: 100%;">
-   
-    <form >
-    <div align="justify" class="container">
-  <fieldset>
-    <legend >Sign Up</legend>
+<body >
+
+<ul class="slideshow">
+    <li><span>Image 01</span></li>
+    <li><span>Image 02</span></li>
+    <li><span>Image 03</span></li>
+    <li><span>Image 04</span></li>
+    <li><span>Image 05</span></li>
+    <li><span>Image 06</span></li>
+  </ul>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <img src="icons/logo.jpg" alt="" width="auto" height="30px " >
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            </ul>
+            
+        </div>
+    </nav>
+<p><br></p>
+    <form action="" method="post">
+      <center>
+    
+    <div class="card" >
+
+    <legend ><b>Sign Up</b></legend>
+
     <?php
         if(!empty($errors)){
-            echo 'Error in you form';
+          echo '<div class="alert-danger hr">';
+          echo '<b>There were error(s) on your form.</b><br>';
+          foreach ($errors as $error) {
+            echo '- ' . $error . '<br>';
+          }
+          echo '</div>';
         }
     ?>
     <div class="form-group" >
       <label for="">Student Id</label>
-      <input type="text" name="stuentId" class="form-control" id="sigmup" aria-describedby="emailHelp" placeholder="Enter index" required>
+      <input type="text" name="studentId" class="form-control" id="studentId" aria-describedby="emailHelp" placeholder="Enter index">
       
     </div>
     <div class="form-group">
       <label for="">Name</label>
-      <input type="text" name="name" class="form-control" id="sigmup" aria-describedby="emailHelp" placeholder="Enter name" required>
+      <input type="text" name="name" class="form-control" id="signup" aria-describedby="emailHelp" placeholder="Enter name" >
       
     </div>
 
     <div class="form-group">
       <label for="">Batch</label>
-      <input type="text" name="batch" class="form-control" id="sigmup" aria-describedby="emailHelp" placeholder="Enter batch" required>
+      <input type="text" name="batch" class="form-control" id="signup" aria-describedby="emailHelp" placeholder="Enter batch" >
       
     </div>
 
     <div class="form-group">
       <label for="">Birthday</label>
-      <input type="date" name="birthday" class="form-control" id="sigmup" aria-describedby="emailHelp" placeholder="Enter birthdate" required>
+      <input type="date" name="birthday" class="form-control" id="signup" aria-describedby="emailHelp" placeholder="Enter birthdate" >
       
     </div>
 
     <div class="form-group">
       <label for="">Email address</label>
-      <input type="email" name="email" class="form-control" id="sigmup" aria-describedby="emailHelp" placeholder="Enter your university email" required>
+      <input type="email" name="email" class="form-control" id="signup" aria-describedby="emailHelp" placeholder="Enter your university email" >
       
     </div>
     <div class="form-group">
       <label for="e">Password</label>
-      <input type="password" name="password" class="form-control" id=""sigmup"" placeholder="Password"  required>
+      <input type="password" name="password" class="form-control" id="signup" placeholder="Password"  >
     </div>
     <div class="form-group">
       <label for="">Faculty</label>
-      <select class="" name=faculty id="sigmup" name= "Faculty"  required>
+      <select class="form-control" name=faculty id="signup"  >
         <option>Faculty of Engineering</option>
         <option>Faculty of Architecture </option>
         <option>Faculty of Information Technology </option>
@@ -131,14 +175,16 @@
     </div>
     <div class="form-group">
       <label for="">Department</label>
-      <input type="text" name="department" class="form-control" id="sigmup" aria-describedby="emailHelp" placeholder="Enter your department">
+      <input type="text" name="department" class="form-control" id="signup" aria-describedby="emailHelp" placeholder="Enter your department">
       
     </div>
    
     
-    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-  </fieldset>
+    <p><button type="submit" name="submit" class="btn btn-primary">Submit</button></p>
+  
   </div>
+  </center>
+      
 </form>
 
     
