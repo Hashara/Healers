@@ -44,10 +44,10 @@
 </nav>
 
 <div class="container">
-<h1 align="center" style="color:white;">Healers</h1>
+<h1 align="center" style="color:black;">Chat room</h1>
     <div class="card">
-      <h3><b>Chat room</b></h3>
-            
+      
+         <p><input type="text" name="message" id="" placeholder="message" class="form-control"></p>   
       <p><input type="button" class="btn btn-primary" value="Send" onclick="window.location.href='message.php'" /></p>
       
     </div>
