@@ -61,11 +61,9 @@
   <div class="column">
     <div class="container">
         <div class="card">
-        <img src="css/message.png" alt="message" width=200 height=auto >
-
-            <p><input type="text" name="message" id="" placeholder="message" class="form-control"></p>   
-          <p><input type="button" class="btn btn-primary" value="Send" onclick="window.location.href='message.php'" /></p>
-          
+        <br>
+<br>
+<br>
         </div>
     </div>
   </div>

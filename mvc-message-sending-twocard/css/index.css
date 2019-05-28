@@ -4,6 +4,7 @@
 
 
 body {
+	max-width: 100%;
   font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;;
   background-color: #000000;
 }
@@ -122,6 +123,7 @@ a{
 .container{
 	position: relative;
 	width: 95%;
+	height:200px;
 	padding: 0;
 	text-align: center;
 	align-self: center;
